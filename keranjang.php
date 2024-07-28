@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Data produk
 $produk = [
     ['id' => 1, 'name' => 'Bunga Mawar', 'price' => 35000, 'image' => 'asset/mawar.png', 'description' => 'Mawar adalah simbol cinta dan keindahan yang klasik dalam buket pengantin. Mawar tersedia dalam berbagai warna seperti merah dan putih. yang masing-masing memiliki makna berbeda. Misalnya, mawar merah melambangkan cinta yang kuat.'],
     ['id' => 2, 'name' => 'Bunga Lily', 'price' => 50000, 'image' => 'asset/lily.png', 'description' => 'Lily adalah bunga yang elegan dan harum. Lily putih adalah simbol kepolosan dan kesucian, sementara lily Stargazer dengan warna-warna cerah melambangkan keberhasilan dan prestise. Lily bisa dipilih sebagai jenis bunga untuk hand bouquet pengantin.'],
@@ -9,24 +10,15 @@ $produk = [
     ['id' => 5, 'name' => 'Bunga Daisy', 'price' => 40000, 'image' => 'asset/daisy.png', 'description' => 'Bunga Daisy sederhana dan segar, sering digunakan dalam pernikahan berkonsep alam. Daisy melambangkan kesederhanaan dan kebahagiaan dan juga sering dianggap sebagai simbol kesucian dan keindahan alami.']
 ];
 
-if (isset($_SESSION['keranjang'])) {
-    $barangkeranjang = $_SESSION['keranjang'];
+// Inisialisasi keranjang belanja jika belum ada
+if (!isset($_SESSION['keranjang'])) {
+    $_SESSION['keranjang'] = [];
 }
+$barangkeranjang = $_SESSION['keranjang'];
 
-// Menambah jumlah barang dalam keranjang belanja
-if (isset($_POST['add_qty'])) {
-    $idproduk = $_POST['product_id'];
-    foreach ($barangkeranjang as &$barang) {
-        if ($barang['id'] == $idproduk) {
-            $_SESSION['keranjang'] = $barangkeranjang;
-            header('Location: keranjang.php');
-            exit();
-        }
-    }
-}
 
 // Hapus barang dari keranjang belanja
-if (isset($_POST['remove_item'])) {
+if (isset($_POST['hapus_barang'])) {
     $idproduk = $_POST['product_id'];
     $keranjang_baru = [];
     foreach ($barangkeranjang as $barang) {
@@ -38,7 +30,6 @@ if (isset($_POST['remove_item'])) {
     header('Location: keranjang.php');
     exit();
 }
-$totalPrice = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,19 +43,11 @@ $totalPrice = 0;
     </script>
 </head>
 <body class="body-keranjang">
-<header class="heading">
-    <div class="main">
-        <div class="logo"><img src="asset/logo.png" alt=""></div>
-        <ul>
-            <li><a href="index2.html" class="icon-button"><img src="asset/logo.png" alt="" width="40px">Home</a></li>
-            <li><a href="index.php" class="icon-button"><img src="asset/box_679821.png" alt="" width="20px">Produk</a></li>
-            <li><a href="about.html" class="icon-button"><img src="asset/icons8-about-48.png" alt="" width="20px">About</a></li>
-            <li><a href="#" class="icon-button"><img src="asset/shopping-cart.png" alt="" width="20px"> Cart</a></li>
-        </ul>
-    </div>
-</header>
+<?php 
+$headerClass = "heading"; 
+include 'header/header.php'; 
+?>
 <div class="container2">
-    <h2>Keranjang Belanja</h2>
     <div class="cart">
     <?php foreach ($barangkeranjang as $barang): ?>
     <div class="item">
@@ -74,12 +57,12 @@ $totalPrice = 0;
         <form method="POST">
             <input type="hidden" name="product_id" value="<?php echo $barang['id']; ?>">
             <input type="number" id="qty_<?php echo $barang['id']; ?>" name="qty" placeholder="Jumlah" min="0" onchange="updateTotal()" class="angka-keranjang" required>
-            <button type="submit" name="remove_item" class="btn-tambah" onclick="updateTotal()">Hapus Barang</button>
+            <button type="submit" name="hapus_barang" class="btn-tambah" onclick="updateTotal()">Hapus Barang</button>
         </form>
     </div>
     <?php endforeach; ?>
     <div class="total">
-        <strong>Total Harga:</strong> Rp <span id="totalPrice"><?php echo $totalPrice; ?></span>
+        <strong>Total Harga:</strong> Rp <span id="totalPrice"></span>
     </div>
     <button type="button" id="btnLanjutPembayaran" class="btn-lanjut" onclick="validasiDanArahkan()">Lanjutkan Pembayaran</button>
     <form id="checkoutForm" method="POST">

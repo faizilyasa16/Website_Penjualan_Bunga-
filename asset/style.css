@@ -11,14 +11,14 @@
     width: 100%;
     padding: 5px;
     background-color: black;
-    z-index: 999; /* Tambahkan z-index yang lebih tinggi */
+	z-index: 1;
 }
 .heading2 {
 	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(gambarhome.jpeg);
 	height: 100vh;
 	background-size: cover;
 	background-position: center;
-	
+	z-index: 1;
 }
 .heading3  {
     position: fixed;
@@ -27,7 +27,6 @@
     width: 100%;
     padding: 5px;
     background-color: transparent;
-    z-index: 999; /* Tambahkan z-index yang lebih tinggi */
 }
 .body-about {
 	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(gambarhome.jpeg);
@@ -46,44 +45,42 @@
     margin: 0 auto;
     padding: 20px;
     text-align: justify;
-    background-color: #f9f9f9; /* Warna latar belakang */
-    border-radius: 10px; /* Sudut bulat */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    background-color: #f9f9f9; 
+    border-radius: 10px; 
 	margin-top: 170px;
 }
 
 .about-us h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333; /* Warna teks */
+    color: #333; 
 }
 
 .about-us p {
     font-size: 16px;
     line-height: 1.6;
-    color: #666; /* Warna teks */
+    color: #666; 
 }
 .contact-us {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     text-align: justify;
-    background-color: #f9f9f9; /* Warna latar belakang */
-    border-radius: 10px; /* Sudut bulat */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    background-color: #f9f9f9; 
+    border-radius: 10px; 
 	margin-top: 110px;
 }
 
 .contact-us h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333; /* Warna teks */
+    color: #333; 
 }
 
 .contact-us p {
     font-size: 16px;
     line-height: 1.6;
-    color: #666; /* Warna teks */
+    color: #666; 
 }
 
 ul{
@@ -139,22 +136,22 @@ ul li a:hover{
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Menyesuaikan transform */
-    text-align: center; /* Untuk membuat teks berada di tengah */
+    transform: translate(-50%, -50%); 
+    text-align: center; 
 }
 .title h1{
     font-family: sans-serif;
     color: #fff;
     font-size: 70px;
-    text-align: center; /* Memastikan teks berada di tengah */
-    margin-left: auto; /* Menghapus margin-left */
-    margin-right: auto; /* Menghapus margin-right */
+    text-align: center; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
 .title h6{
     font-family: sans-serif;
     color: #fff;
     font-size: 20px;
-    text-align: center; /* Memastikan teks berada di tengah */
+    text-align: center;
     margin-top: 10px;
 }
 .text-container {
@@ -181,13 +178,26 @@ ul li a:hover{
 	color: #000
 }
 #slider, #slides, #controls, #bullets {
-    margin-top: 100px; /* Sesuaikan nilai ini sesuai kebutuhan */
+    margin-top: 100px; 
 }
 #slider {
 	margin: 0 auto;
 	width: 90%;
 	max-width: 100%;
  }
+ .slide-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Center the image inside the slide */
+    align-items: center; /* Center the image inside the slide */
+}
+
+.slide-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire slide */
+}
  #slider input[type=radio] {
 	display: none;
  }
@@ -227,10 +237,6 @@ ul li a:hover{
 	align-items: center;
 	height: 100%;
 	color: #fff;
- }
-
- #slides .slide_3 {
-	background: #007EA7;
  }
  #controls {
 	margin: -180px 0 0 0;
@@ -284,20 +290,6 @@ ul li a:hover{
 #slide3:checked ~ #bullets label:nth-child(3) {
 	background: #444;
 }
-@media screen and (max-width: 900px) {
-    #slide1:checked ~ #controls label:nth-child(2),
-    #slide2:checked ~ #controls label:nth-child(3),
-    #slide3:checked ~ #controls label:nth-child(1),
-    #slide1:checked ~ #controls label:nth-child(3),
-    #slide2:checked ~ #controls label:nth-child(1),
-    #slide3:checked ~ #controls label:nth-child(2) {
-       margin: 0;
-    }
-    #slides {
-       max-width: calc(100% - 140px);
-       margin: 0 auto;
-    }
-}
 
 
 #slider p{
@@ -340,8 +332,8 @@ ul li a:hover{
 }
   
 .card-img-top {
-		height: 400px; /* Sesuaikan tinggi sesuai kebutuhan */
-		object-fit: cover; /* Menyesuaikan gambar agar tidak terlalu terdistorsi */
+		height: 400px;
+		object-fit: cover; 
 		background-color: white;
 	
 }

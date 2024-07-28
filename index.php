@@ -10,13 +10,8 @@ $produk = [
     ['id' => 5, 'name' => 'Bunga Daisy', 'price' => 40000, 'image' => 'asset/daisy.png', 'description' => 'Bunga Daisy sederhana dan segar, sering digunakan dalam pernikahan berkonsep alam. Daisy melambangkan kesederhanaan dan kebahagiaan dan juga sering dianggap sebagai simbol kesucian dan keindahan alami.']
 ];
 
-// Inisialisasi keranjang belanja jika belum ada
-if (!isset($_SESSION['keranjang'])) {
-    $_SESSION['keranjang'] = [];
-}
-
 // Tambah produk ke keranjang
-if (isset($_POST['add_to_cart'])) {
+if (isset($_POST['tambahkan_keranjang'])) {
     $idproduk = $_POST['product_id'];
     $product = null;
 
@@ -33,6 +28,7 @@ if (isset($_POST['add_to_cart'])) {
         $_SESSION['keranjang'][] = $product;
         echo "<script>alert('Produk telah ditambahkan ke dalam cart');</script>";
     }
+
 }
 ?>
 
@@ -45,17 +41,10 @@ if (isset($_POST['add_to_cart'])) {
     <link rel="stylesheet" type="text/css" href="asset/style.css">
 </head>
 <body class="body-produk">
-<header class="heading">
-    <div class="main">
-        <div class="logo"><img src="asset/logo.png" alt=""></div>
-        <ul>
-            <li><a href="index2.html" class="icon-button"><img src="asset/logo.png" alt="" width="40px">Home</a></li>
-            <li><a href="#" class="icon-button"><img src="asset/box_679821.png" alt="" width="20px">Produk</a></li>
-            <li><a href="about.html" class="icon-button"><img src="asset/icons8-about-48.png" alt="" width="20px">About</a></li>
-            <li><a href="keranjang.php" class="icon-button"><img src="asset/shopping-cart.png" alt="" width="20px">Cart</a></li>
-        </ul>
-    </div>
-</header>
+<?php 
+$headerClass = "heading"; 
+include 'header/header.php'; 
+?>
 <div id="slider">
    <input type="radio" name="slider" id="slide1" checked>
    <input type="radio" name="slider" id="slide2">
@@ -65,17 +54,17 @@ if (isset($_POST['add_to_cart'])) {
          <div class="inner">
             <div class="slide slide_1">
                 <div class="slide-content">
-                    <img src="asset/poster2.jpeg" alt="" width="1700" height="300">
+                    <img src="asset/poster2.jpeg" alt="">
                </div>
             </div>
             <div class="slide slide_2">
                <div class="slide-content">
-               <img src="asset/poster3.jpeg" alt="" width="1687" height="300">
+               <img src="asset/poster3.jpeg" alt="">
                </div>
             </div>
             <div class="slide slide_3">
                <div class="slide-content">
-               <img src="asset/poster4.jpeg" alt="" width="1687" height="300">
+               <img src="asset/poster4.jpeg" alt="">
                </div>
             </div>
          </div>
@@ -107,7 +96,7 @@ if (isset($_POST['add_to_cart'])) {
                 <div class="card-footer">
                     <form method="POST">
                         <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                        <button type="submit" name="add_to_cart" class="btn btn-primary"><img src="asset/shopping-cart.png" alt="" width="25px"></button>
+                        <button type="submit" name="tambahkan_keranjang" class="btn btn-primary"><img src="asset/shopping-cart.png" alt="" width="25px"></button>
                     </form>
                     <div class="price">Rp <?php echo $product['price']; ?></div>
                 </div>

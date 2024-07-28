@@ -1,6 +1,6 @@
 // Update total price function
 function updateTotal() {
-    const qtyInputs = document.querySelectorAll('.angka-keranjang');
+    const qtyInputs = document.getElementsByClassName('angka-keranjang');
     let totalHarga = 0;
     for (let i = 0; i < qtyInputs.length; i++) {
         const input = qtyInputs[i];
@@ -36,8 +36,8 @@ document.getElementById('Pembayaran').addEventListener('change', function() {
 
 // Validate and navigate function
 function validasiDanArahkan() {
-    const qtyInputs = document.querySelectorAll('.angka-keranjang');
-    
+    const qtyInputs = document.getElementsByClassName('angka-keranjang');
+    let totalHarga = 0;
     for (let i = 0; i < qtyInputs.length; i++) {
         const input = qtyInputs[i];
         if (input.value === '' || parseInt(input.value) <= 0) {
@@ -50,17 +50,7 @@ function validasiDanArahkan() {
         }
     }
 
-    let totalHarga = 0;
-    const items = document.querySelectorAll('.item');
-
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        const harga = parseInt(item.querySelector('.price').innerText.replace('Rp ', ''));
-        const qty = parseInt(item.querySelector('.angka-keranjang').value);
-        totalHarga += harga * qty;
-    }
-
-    if (totalHarga === 0) {
+    if (totalHarga == 0) {
         alert('Keranjang belanja Anda kosong. Mohon tambahkan produk terlebih dahulu.');
         window.location.href = 'index.php';
         return;
